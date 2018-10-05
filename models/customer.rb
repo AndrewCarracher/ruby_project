@@ -11,4 +11,27 @@ class Customer
     @phone_number = options['phone_number']
   end
 
+  def save()
+
+  end
+
+  def self.all()
+
+  end
+
+  def all(id)
+
+  end
+
+  def update()
+
+  end
+
+  def delete(id)
+
+  end
+
+  def self.delete
+
+  end
 end

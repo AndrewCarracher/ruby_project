@@ -10,4 +10,27 @@ class Cover
     @time = options['time']
   end
 
+  def save()
+
+  end
+
+  def self.all()
+
+  end
+
+  def all(id)
+
+  end
+
+  def update()
+
+  end
+
+  def delete(id)
+
+  end
+
+  def self.delete
+
+  end
 end
