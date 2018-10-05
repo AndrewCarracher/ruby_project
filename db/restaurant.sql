@@ -11,5 +11,5 @@ CREATE TABLE customers(
 
 CREATE TABLE covers(
   id SERIAL8 PRIMARY KEY,
-  customer_id REFERENCES cutsomers(id)
+  customer_id INT8 REFERENCES customers(id)
 );
