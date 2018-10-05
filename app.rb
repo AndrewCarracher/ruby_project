@@ -1,0 +1,6 @@
+require( 'sinatra' )
+require( 'sinatra/contrib/all' )
+require( 'pry' )
+require_relative( './models/cover' )
+require_relative( './models/customer' )
+also_reload( './models/*' )

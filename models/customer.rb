@@ -16,16 +16,16 @@ class Customer
   def save()
     sql = " INSERT INTO customers
     (
-      id, first_name, last_name, email, phone_number
+      first_name, last_name, email, phone_number
       )
       VALUES
       (
-        $1, $2, $3, $4, $5
+        $1, $2, $3, $4
         )
         RETURNING id"
-    values = [@id, @first_name, @last_name, @email, @phone_number]
+    values = [@first_name, @last_name, @email, @phone_number]
     results = SqlRunner.run(sql, values)
-    @id = results.first(['id'].to_i)
+    @id = results.first()['id'].to_i
   end
 
   def self.all()

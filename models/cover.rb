@@ -24,7 +24,7 @@ class Cover
         RETURNING id"
     values = [@customer_id]
     results = SqlRunner.run(sql, values)
-    @id = results.first(['id'].to_i)
+    @id = results.first()['id'].to_i
   end
 
   def self.all()
