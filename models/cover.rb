@@ -1,3 +1,5 @@
+require_relative('../db/sql_runner')
+
 class Cover
 
   attr_accessor :space_available, :time

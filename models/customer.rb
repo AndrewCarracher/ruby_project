@@ -1,3 +1,5 @@
+require_relative('../db/sql_runner')
+
 class Customer
 
   attr_accessor :first_name, :last_name, :email, :phone_number
