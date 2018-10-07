@@ -55,8 +55,7 @@ class Restaurant
       new_cover = Cover.new({
         "space" => cover_space,
         "time" => cover_time
-        })
-
+        })        
   end
 
 end
