@@ -39,18 +39,6 @@ cover2 = Cover.new({
 cover3 = Cover.new({
   "space_available" => 15,
   "time" => {
-    "11:00" => true,
-    "12:00" => true,
-    "13:00" => true,
-    "14:00" => true,
-    "15:00" => true,
-    "16:00" => true,
-    "17:00" => true,
-    "18:00" => true,
-    "19:00" => true,
-    "20:00" => true,
-    "21:00" => true,
-    "22:00" => true,
   }
   })
 
