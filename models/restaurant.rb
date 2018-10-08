@@ -15,14 +15,14 @@ class Restaurant
   def save()
     sql = " INSERT INTO restaurants
     (
-      name, opening_hours, cover_slots
+      name
       )
       VALUES
       (
-        $1, $2, $3
+        $1
         )
         RETURNING id"
-    values = [@name, @opening_hours, @cover_slots]
+    values = [@name]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end

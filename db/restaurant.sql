@@ -19,9 +19,7 @@ CREATE TABLE covers(
 
 CREATE TABLE restaurants(
   id SERIAL8 PRIMARY KEY,
-  name VARCHAR(255),
-  opening_hours VARCHAR(255),
-  cover_slots VARCHAR(255)
+  name VARCHAR(255)
 );
 
 CREATE TABLE bookings(
