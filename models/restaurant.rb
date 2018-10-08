@@ -2,25 +2,27 @@ require_relative( 'cover.rb' )
 
 class Restaurant
 
-  attr_accessor :opening_hours
+  attr_accessor :name, :opening_hours, :table_hours
   attr_reader :id
 
   def initialize(options)
     @id = options['id'].to_i() if options['id']
-    @opening_hours = options['opening_hours'].to_i()
+    @name = options['name']
+    @opening_hours = options['opening_hours']
+    @cover_slots = options['cover_slots']
   end
 
   def save()
     sql = " INSERT INTO restaurants
     (
-      opening_hours
+      name, opening_hours, cover_slots
       )
       VALUES
       (
-        $1
+        $1, $2, $3
         )
         RETURNING id"
-    values = [@opening_hours]
+    values = [@name, @opening_hours, @cover_slots]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end

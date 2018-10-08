@@ -7,7 +7,7 @@ class Cover
 
   def initialize(options)
     @id = options['id'].to_i() if options['id']
-    @size = options['space_available'].to_i()
+    @size = options['size'].to_i()
   end
 
   def save()
