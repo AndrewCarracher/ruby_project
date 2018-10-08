@@ -2,7 +2,7 @@ require_relative('../db/sql_runner')
 
 class Customer
 
-  attr_accessor :first_name, :last_name, :email, :phone_number
+  attr_accessor :first_name, :last_name, :email, :phone_number, :party_size
   attr_reader :id
 
   def initialize(options)
@@ -11,19 +11,20 @@ class Customer
     @last_name = options['last_name']
     @email = options['email']
     @phone_number = options['phone_number']
+    @party_size = options['party_size']
   end
 
   def save()
     sql = " INSERT INTO customers
     (
-      first_name, last_name, email, phone_number
+      first_name, last_name, email, phone_number, party_size
       )
       VALUES
       (
-        $1, $2, $3, $4
+        $1, $2, $3, $4, $5
         )
         RETURNING id"
-    values = [@first_name, @last_name, @email, @phone_number]
+    values = [@first_name, @last_name, @email, @phone_number, @party_size]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
@@ -49,11 +50,12 @@ class Customer
       first_name,
       last_name,
       email,
-      phone_number
-      ) = ( $1, $2, $3, $4 )
-    WHERE id = $5"
+      phone_number,
+      party_size
+      ) = ( $1, $2, $3, $4, $5)
+    WHERE id = $6"
 
-    values = [@first_name, @last_name, @email, @phone_number, @id]
+    values = [@first_name, @last_name, @email, @phone_number, @party_size, @id]
   end
 
   def delete(id)

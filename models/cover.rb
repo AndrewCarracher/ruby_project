@@ -2,35 +2,33 @@ require_relative('../db/sql_runner')
 
 class Cover
 
-  attr_accessor :space_available, :time
-  attr_reader :id, :customer_id
+  attr_accessor :size
+  attr_reader :id
 
   def initialize(options)
     @id = options['id'].to_i() if options['id']
-    @customer_id = options['customer_id'].to_i()
-    @space_available = options['space_available'].to_i()
-    @time = options['time']
+    @size = options['space_available'].to_i()
   end
 
   def save()
     sql = " INSERT INTO covers
     (
-      customer_id
+      size
       )
       VALUES
       (
         $1
         )
         RETURNING id"
-    values = [@customer_id]
+    values = [@size]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
 
   def self.all()
-    sql = "SELECT * FROM customers"
+    sql = "SELECT * FROM covers"
     results = SqlRunner.run( sql )
-    return results.map { |customer| Customer.new( customer ) }
+    return results.map { |cover| Cover.new( cover ) }
   end
 
   def all(id)
