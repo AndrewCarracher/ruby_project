@@ -63,35 +63,38 @@ chicken_shack = Restaurant.new({
 
 chicken_shack.save()
 
-# pizza_palace = Restaurant.new({
-#   "opening_hours" => {
-#       "open" => "11:00",
-#       "close" => "22:00"
-#   },
-#   "cover_slots" => {
-#     "11:00" => [cover4, cover5 ,cover6],
-#     "13:00" => [cover4, cover5 ,cover6],
-#     "15:00" => [cover4, cover5 ,cover6],
-#     "17:00" => [cover4, cover5 ,cover6],
-#     "19:00" => [cover4, cover5 ,cover6],
-#     "21:00" => [cover4, cover5 ,cover6]
-#   }
-#   })
-#
-# pizza_palace.save()
-#
-# burger_bar = Restaurant.new({  "opening_hours" => {
-#       "open" => "11:00",
-#       "close" => "22:00"
-#   },
-#   "cover_slots" => {
-#     "11:00" => [cover7, cover8 ,cover9],
-#     "13:00" => [cover7, cover8 ,cover9],
-#     "15:00" => [cover7, cover8 ,cover9],
-#     "17:00" => [cover7, cover8 ,cover9],
-#     "19:00" => [cover7, cover8 ,cover9],
-#     "21:00" => [[cover7, cover8 ,cover9]
-#   }
-#   })
-#
-# burger_bar.save()
+pizza_palace = Restaurant.new({
+  "name" => "The Pizza Palace",
+  "opening_hours" => {
+      "open" => "11:00",
+      "close" => "22:00"
+  },
+  "cover_slots" => {
+    "11:00" => [cover4, cover5 ,cover6],
+    "13:00" => [cover4, cover5 ,cover6],
+    "15:00" => [cover4, cover5 ,cover6],
+    "17:00" => [cover4, cover5 ,cover6],
+    "19:00" => [cover4, cover5 ,cover6],
+    "21:00" => [cover4, cover5 ,cover6]
+  }
+  })
+
+pizza_palace.save()
+
+burger_bar = Restaurant.new({
+  "name" => "The Burger Bar",
+  "opening_hours" => {
+      "open" => "11:00",
+      "close" => "22:00"
+  },
+  "cover_slots" => {
+    "11:00" => [cover7, cover8 ,cover9],
+    "13:00" => [cover7, cover8 ,cover9],
+    "15:00" => [cover7, cover8 ,cover9],
+    "17:00" => [cover7, cover8 ,cover9],
+    "19:00" => [cover7, cover8 ,cover9],
+    "21:00" => [cover7, cover8 ,cover9]
+  }
+  })
+
+burger_bar.save()
