@@ -16,8 +16,23 @@ class Booking
 
   def self.check_availablity( time )
     sql = " SELECT * FROM bookings
-    "
+    WHERE booking_time = $1"
+    values = [time]
+    results = SqlRunner.run( sql, values )
+    free = results.map { |booking| Booking.new( booking ) }
 
+    if free != []
+
+      number_of_bookings = free.length()
+
+      if number_of_bookings > 3
+        return false
+      else
+      return true
+      end
+    end
+
+    return false
   end
 
   def save()

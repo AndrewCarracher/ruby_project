@@ -32,10 +32,10 @@ class Cover
     return results.map { |cover| Cover.new( cover ) }
   end
 
-  def all(id)
+  def self.find(name)
     sql = "SELECT * FROM covers
-    WHERE id = $1"
-    values = [id]
+    WHERE name = $1"
+    values = [name]
     results = SqlRunner.run( sql, values )
     return Cover.new( results.first )
   end
