@@ -5,12 +5,35 @@ require_relative('restaurant')
 class Booking
 
   attr_reader :id, :customer_id, :restaurants_id, :covers_id
+  attr_accessor :first_name, :last_name, :email, :phone_number, :party_size, :restaurant, :time_requested
 
   def initialize(options)
     @id = options['id'].to_i() if options['id']
     @customer_id = options['customer_id'].to_i()
     @restaurants_id = options['restaurants_id'].to_i()
     @covers_id = options['covers_id'].to_i()
+    @first_name = options['first_name'].to_i()
+    @last_name = options['last_name'].to_i()
+    @email = options['email'].to_i()
+    @phone_number = options['phone_number'].to_i()
+    @party_size = options['party_size'].to_i()
+    @restaurant = options['restaurant'].to_i()
+    @time_requested = options['time_requested'].to_i()
+  end
+
+  def self.make_booking()
+    restaurant = Restaurant.find_by_name(@restaurant)
+    #if time_requested == ok && booking ok
+
+      customer = Customer.new(@first_name, @last_name, @email, @phone_number, @party_size)
+      customer.save()
+
+      #get restaurant from name
+      #ammend and update restaurant time
+      #create & save booking
+
+    #else
+
   end
 
   def save()
@@ -75,7 +98,7 @@ class Booking
   #   if time_requested > restaurant_open && time_requested < restaurant_close
   #
   #     #code in here
-  # 
+  #
   #   else
   #
   #     return "restaurant is not open then"

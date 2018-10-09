@@ -15,14 +15,14 @@ class Restaurant
   def save()
     sql = " INSERT INTO restaurants
     (
-      name
+      name, opening_hours, cover_slots
       )
       VALUES
       (
-        $1
+        $1, $2, $3
         )
         RETURNING id"
-    values = [@name]
+    values = [@name, @opening_hours.to_s, @cover_slots.to_s]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
@@ -52,6 +52,14 @@ class Restaurant
   def self.delete
     sql = "DELETE FROM restaurants"
     SqlRunner.run( sql )
+  end
+
+  def find_by_name( name )
+    sql = "SELECT * FROM restaurants
+    WHERE name = $1"
+    values = [name]
+    results = SqlRunner.run( sql, values )
+    return Restaurant.new( results.first )
   end
 
 ##  OLD CODE BELOW  ##
