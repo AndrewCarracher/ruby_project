@@ -8,8 +8,8 @@ class Restaurant
   def initialize(options)
     @id = options['id'].to_i() if options['id']
     @name = options['name']
-    @opening_hours = options['opening_hours']
-    @cover_slots = options['cover_slots']
+    @open = options['open']
+    @close = options['close']
   end
 
   def save()
@@ -54,7 +54,7 @@ class Restaurant
     SqlRunner.run( sql )
   end
 
-  def find_by_name( name )
+  def self.find_by_name( name )
     sql = "SELECT * FROM restaurants
     WHERE name = $1"
     values = [name]

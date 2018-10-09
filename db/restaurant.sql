@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS bookings;
-DROP TABLE IF EXISTS restaurants;
 DROP TABLE IF EXISTS covers;
+DROP TABLE IF EXISTS restaurants;
 DROP TABLE IF EXISTS customers;
 
 CREATE TABLE customers(
@@ -12,21 +12,23 @@ CREATE TABLE customers(
   party_size INT2
 );
 
-CREATE TABLE covers(
-  id SERIAL8 PRIMARY KEY,
-  size INT2
-);
-
 CREATE TABLE restaurants(
   id SERIAL8 PRIMARY KEY,
   name VARCHAR(255),
-  opening_hours TEXT,
-  cover_slots TEXT
+  open VARCHAR(255),
+  close VARCHAR(255)
+);
+
+CREATE TABLE covers(
+  id SERIAL8 PRIMARY KEY,
+  time_available VARCHAR(255),
+  customers_id INT8 REFERENCES customers(id),
+  restaurants_id INT8 REFERENCES restaurants(id),
+  size INT2
 );
 
 CREATE TABLE bookings(
   id SERIAL8 PRIMARY KEY,
   customers_id INT8 REFERENCES customers(id),
-  covers_id INT8 REFERENCES covers(id),
   restaurants_id INT8 REFERENCES restaurants(id)
 );
