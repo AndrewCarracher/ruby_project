@@ -14,7 +14,7 @@ class Booking
     @booking_time = options['booking_time'].to_i()
   end
 
-  def self.check_availablity( time )
+  def self.check_availablity( time, space )
     sql = " SELECT * FROM bookings
     WHERE booking_time = $1"
     values = [time]
@@ -25,13 +25,22 @@ class Booking
 
       number_of_bookings = free.length()
 
-      if number_of_bookings > 3
+      if number_of_bookings == 3
         return false
       else
-      return true
+        free.ids = []
+        for booking in free do
+          free.ids += booking.id
+        end
+
+        free_space = calculate_free_space( free.ids )
+
+        if free_space - space < 0
+          return true
+        end
       end
     end
-
+    
     return false
   end
 

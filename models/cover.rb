@@ -40,6 +40,14 @@ class Cover
     return Cover.new( results.first )
   end
 
+  def self.find_id(id)
+    sql = "SELECT * FROM covers
+    WHERE id = $1"
+    values = [id]
+    results = SqlRunner.run( sql, values )
+    return Cover.new( results.first )
+  end
+
   def delete(id)
     sql = "DELETE FROM covers
     WHERE id = $1"
@@ -51,5 +59,25 @@ class Cover
   def self.delete
     sql = "DELETE FROM covers"
     SqlRunner.run( sql )
+  end
+
+  def self.calculate_free_space( booked_tables_id )
+
+    total_space = 0
+    space_taken = 0
+
+    for id in booked_tables_id do
+      indivdual_cover = Cover.find_id(id)
+      space += indivdual_cover.size
+    end
+
+    all_covers = Cover.all()
+
+    for cover in all_covers do
+      total_space += cover.size
+    end
+
+    return total_space - space_taken
+
   end
 end
