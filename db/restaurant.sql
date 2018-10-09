@@ -21,14 +21,16 @@ CREATE TABLE restaurants(
 
 CREATE TABLE covers(
   id SERIAL8 PRIMARY KEY,
-  time_available VARCHAR(255),
-  customers_id INT8 REFERENCES customers(id),
-  restaurants_id INT8 REFERENCES restaurants(id),
+  -- time_available VARCHAR(255),
+  -- customers_id INT8 REFERENCES customers(id),
+  restaurants_id INT8 REFERENCES restaurants(id) ON DELETE CASCADE,
   size INT2
 );
 
 CREATE TABLE bookings(
   id SERIAL8 PRIMARY KEY,
+  covers_id INT8 REFERENCES covers(id),
   customers_id INT8 REFERENCES customers(id),
-  restaurants_id INT8 REFERENCES restaurants(id)
+  booking_time VARCHAR(255)
+  -- restaurants_id INT8 REFERENCES restaurants(id)
 );

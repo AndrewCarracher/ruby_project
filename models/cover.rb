@@ -2,10 +2,11 @@ require_relative('../db/sql_runner')
 
 class Cover
 
-  attr_accessor :size
+  attr_accessor :restaurants_id, :size
   attr_reader :id
 
   def initialize(options)
+    @restaurants_id = options['restaurants_id'].to_i()
     @id = options['id'].to_i() if options['id']
     @size = options['size'].to_i()
   end
@@ -13,14 +14,14 @@ class Cover
   def save()
     sql = " INSERT INTO covers
     (
-      size
+      restaurants_id, size
       )
       VALUES
       (
-        $1
+        $1, $2
         )
         RETURNING id"
-    values = [@size]
+    values = [@restaurants_id, @size]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end

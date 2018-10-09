@@ -4,6 +4,7 @@ require( 'pry' )
 require_relative( './models/cover' )
 require_relative( './models/customer' )
 require_relative( './models/restaurant' )
+require_relative('./contro')
 also_reload( './models/*' )
 
 get '/' do
