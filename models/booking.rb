@@ -1,5 +1,6 @@
 require_relative('cover')
 require_relative('customer')
+require('pry')
 
 class Booking
 
@@ -14,47 +15,50 @@ class Booking
     @booking_time = options['booking_time'].to_i()
   end
 
-  def self.check_availablity( time, space )
-    sql = " SELECT * FROM bookings
-    WHERE booking_time = $1"
-    values = [time]
-    results = SqlRunner.run( sql, values )
-    free = results.map { |booking| Booking.new( booking ) }
+  def self.check_availablity( time, space, restaurants_name )
 
-    if free != []
+    cover_id_array = Cover.all_of_covers_by_restaurant_name(restaurants_name)
 
-      number_of_bookings = free.length()
+    for cover in cover_id_array do
 
-      if number_of_bookings == 3
+      sql = " SELECT * FROM bookings
+      WHERE booking_time = $1
+      AND covers_id = $2"
+      values = [time, cover]
+      results = SqlRunner.run( sql, values )
+      free = results.map { |booking| Booking.new( booking ) }
+
+
+      if free.length != 0
+
+        for booking in free
+          free_space = Cover.calculate_free_space( booking.id )
+
+          if free_space - space >= 0
+
+            return booking.id
+          end
+        end
+
         return false
-      else
-        free.ids = []
-        for booking in free do
-          free.ids += booking.id
-        end
-
-        free_space = calculate_free_space( free.ids )
-
-        if free_space - space < 0
-          return true
-        end
       end
+
+      return cover_id_array.first
+
     end
-    
-    return false
   end
 
   def save()
     sql = " INSERT INTO bookings
     (
-      customer_id, restaurants_id, covers_id, booking_time
+      customers_id, covers_id, booking_time
       )
       VALUES
       (
-        $1, $2, $3, $4
+        $1, $2, $3
         )
         RETURNING id"
-    values = [@customer_id, @restaurants_id, @covers_id, @booking_time]
+    values = [@customer_id, @covers_id, @booking_time]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
@@ -73,11 +77,24 @@ class Booking
    return Booking.new( results.first )
   end
 
+  def self.find_time(customer_id, cover_id)
+    sql = "SELECT * FROM bookings
+   WHERE customers_id = $1 AND covers_id = $2"
+   values = [customer_id, cover_id]
+   results = SqlRunner.run( sql, values )
+   if results.first == nil
+     return "not found"
+   else
+     booking = Booking.new( results.first )
+     return booking.booking_time
+   end
+  end
+
   def update()
     sql = "UPDATE bookings
     SET
     (
-      customer_id, restaurants_id, covers_id
+      customers_id, restaurants_id, covers_id
       ) = ( $1, $2, $3)
     WHERE id = $4"
 

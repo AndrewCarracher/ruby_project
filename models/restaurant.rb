@@ -33,12 +33,13 @@ class Restaurant
     return results.map { |restaurant| Restaurant.new( restaurant ) }
   end
 
-  def all(id)
+  def self.find_id_by_name(name)
     sql = "SELECT * FROM restaurants
-    WHERE id = $1"
-    values = [id]
+    WHERE name = $1"
+    values = [name]
     results = SqlRunner.run( sql, values )
-    return Restaurant.new( results.first )
+    restaurant =  Restaurant.new( results.first )
+    return restaurant.id
   end
 
   def delete(id)

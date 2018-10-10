@@ -29,10 +29,13 @@ class Customer
     @id = results.first()['id'].to_i
   end
 
-  def self.all()
-    sql = "SELECT * FROM customers"
-    results = SqlRunner.run( sql )
-    return results.map { |customer| Customer.new( customer ) }
+  def self.find_by_name( f_name, l_name )
+    sql = "SELECT * FROM customers
+    WHERE first_name = $1
+    AND last_name = $2"
+    values = [f_name, l_name]
+    results = SqlRunner.run( sql, values )
+    return results.map { |customer| Customer.new( customer ) }.first
   end
 
   def all(id)

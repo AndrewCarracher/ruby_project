@@ -7,6 +7,9 @@ require('pry')
 
 Restaurant.delete()
 Cover.delete()
+Customer.delete()
+Booking.delete()
+
 
 pizza_palace = Restaurant.new({
   "name" => "The Pizza Palace",

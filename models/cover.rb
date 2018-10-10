@@ -32,6 +32,23 @@ class Cover
     return results.map { |cover| Cover.new( cover ) }
   end
 
+  def self.all_of_covers_by_restaurant_name(restaurants_name)
+    id = Restaurant.find_id_by_name(restaurants_name)
+    sql = "SELECT * FROM covers
+    WHERE restaurants_id = $1"
+    values = [id]
+    results = SqlRunner.run( sql, values )
+    cover_array = results.map { |cover| Cover.new( cover ) }
+    cover_array_id = []
+
+    for cover in cover_array do
+      cover_array_id << cover.id
+    end
+
+     return cover_array_id
+
+  end
+
   def self.find(name)
     sql = "SELECT * FROM covers
     WHERE name = $1"
@@ -46,6 +63,14 @@ class Cover
     values = [id]
     results = SqlRunner.run( sql, values )
     return Cover.new( results.first )
+  end
+
+  def self.find_by_restaurant_id(id)
+    sql = "SELECT * FROM covers
+    WHERE restaurants_id = $1"
+    values = [id]
+    results = SqlRunner.run( sql, values )
+    return results.map { |cover| Cover.new( cover ) }
   end
 
   def delete(id)

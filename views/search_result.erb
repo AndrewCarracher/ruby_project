@@ -1,0 +1,12 @@
+
+<% @cover_array.each do |cover|  %>
+
+  <%
+  booking_time = Booking.find_time(@customer1.id, cover.id) %>
+  <% if booking_time != 'not found' %>
+    <p><%= p @restaurant_name + " " + booking_time.to_s + ":00" %></p>
+    <form action="/update_booking" method="post">
+      <input type="submit" value="Update Booking">
+    </form>
+  <% end %>
+<% end %>
