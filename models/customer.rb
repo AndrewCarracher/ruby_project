@@ -46,6 +46,14 @@ class Customer
    return Customer.new( results.first )
   end
 
+  def self.all(id)
+    sql = "SELECT * FROM customers
+   WHERE id = $1"
+   values = [id]
+   results = SqlRunner.run( sql, values )
+   return Customer.new( results.first )
+  end
+
   def update()
     sql = "UPDATE customers
     SET

@@ -39,36 +39,18 @@ post '/display_booking' do
   erb ( :search_result )
 end
 
-get "/update_booking" do
-  erb( :update)
+get "/update_booking/:id" do
+  erb( :update )
 end
 
-post "/" do
+post "/updated_booking/:id" do
+  booking = Booking.find(params[:id].to_i)
+  booking.update(params["time_requested"])
+
+  customer1 = Customer.all(booking.customer_id)
+  customer1.update(params)
+
   erb( :updated)
 end
 
 #########
-
-
-
-
-get '/bookings' do # display all bookings
-  @booking = Booking.all()
-  erb( :index )
-end
-
-get '/bookings/:id/edit' do # form for bookings
-  @booking = Booking.find( params[:id] )
-  erb( :edit )
-end
-
-post '/bookings/:id' do # updated booking form info inserted here
-  Booking.new( params ).update
-  redirect to '/'
-end
-
-post '/bookings/:id/delete' do # delete
-  order = Booking.find( params[:id] )
-  order.delete()
-  redirect to '/'
-end

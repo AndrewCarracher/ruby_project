@@ -90,15 +90,29 @@ class Booking
    end
   end
 
-  def update()
+  def self.find_id(customer_id, cover_id, booking_time)
+    sql = "SELECT * FROM bookings
+   WHERE customers_id = $1 AND covers_id = $2
+   AND booking_time = $3"
+   values = [customer_id, cover_id, booking_time]
+   results = SqlRunner.run( sql, values )
+   if results.first == nil
+     return "not found"
+   else
+     booking = Booking.new( results.first )
+     return booking.id
+   end
+  end
+
+  def update(time)
     sql = "UPDATE bookings
     SET
     (
-      customers_id, restaurants_id, covers_id
-      ) = ( $1, $2, $3)
-    WHERE id = $4"
+      booking_time
+      ) = ( $1)
+    WHERE id = $2"
 
-    values = [@customer_id, @restaurants_id, @covers_id]
+    values = [@booking_time]
   end
 
   def delete(id)

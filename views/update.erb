@@ -1,0 +1,32 @@
+<h1>Insert New Details For Booking</h1>
+
+<form action="/updated_booking/<%=  params[:id] %>" method="post">
+
+    <label for="first-name-field">First Name:</label>
+    <input type="text" name="first_name" value="">
+
+    <label for="last-name-field">Last Name:</label>
+    <input type="text" name="last_name" value="">
+
+    <label for="email">Email:</label>
+    <input type="text" name="email" value="">
+
+    <label for="phone-number">Phone Number:</label>
+    <input type="text" name="phone_numbers" value="">
+
+    <label for="party-size">Party Size:</label>
+    <input type="number" name="party_size" id="party-size-field">
+
+    <label for="time-requested">Select Your Time</label>
+    <select id="time-selection" name="time_requested">
+      <option value="11:00">11:00</option>
+      <option value="13:00">13:00</option>
+      <option value="15:00">15:00</option>
+      <option value="17:00">17:00</option>
+      <option value="19:00">19:00</option>
+      <option value="21:00">21:00</option>
+    </select>
+
+    <input type="submit" value="Submit Booking">
+
+  </form>
