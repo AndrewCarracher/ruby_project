@@ -1,28 +1,30 @@
-<h1>Please fill in the details below</h1>
+<div class="form_colour">
+
+<h1>Please fill in the details below</h1><br/>
 
 <form action="/create_booking" method="post">
 
   <label for="first-name-field">First Name:</label>
-  <input type="text" name="first_name" value="">
+  <input type="text" name="first_name"><br/><br/>
 
   <label for="last-name-field">Last Name:</label>
-  <input type="text" name="last_name" value="">
+  <input type="text" name="last_name" value=""><br/><br/>
 
   <label for="email">Email:</label>
-  <input type="text" name="email" value="">
+  <input type="text" name="email" value=""><br/><br/>
 
   <label for="phone-number">Phone Number:</label>
-  <input type="text" name="phone_numbers" value="">
+  <input type="text" name="phone_numbers" value=""><br/><br/>
 
   <label for="party-size">Party Size:</label>
-  <input type="number" name="party_size" id="party-size-field">
+  <input type="number" name="party_size" id="party-size-field"><br/><br/>
 
   <label for="restaurant">Select Your Restaurant</label>
   <select id="restaurant-selection" name="restaurant">
     <option value="The Chicken Shack">The Chicken Shack</option>
     <option value="The Burger Bar">The Burger Bar</option>
     <option value="The Pizza Palace">The Pizza Palace</option>
-  </select>
+  </select><br/><br/>
 
   <label for="time-requested">Select Your Time</label>
   <select id="time-selection" name="time_requested">
@@ -32,8 +34,9 @@
     <option value="17:00">17:00</option>
     <option value="19:00">19:00</option>
     <option value="21:00">21:00</option>
-  </select>
+  </select><br/><br/>
 
   <input type="submit" value="Submit Booking">
 
 </form>
+</div>

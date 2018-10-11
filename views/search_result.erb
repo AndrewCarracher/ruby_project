@@ -7,11 +7,11 @@
     <%count += 1 %>
     <p><%= p @restaurant_name + " " + booking_time.to_s + ":00" %>
 
-    <% booking_id = Booking.find_id(@customer1.id, cover.id, booking_time) %></p>
+    <% booking_id = Booking.find_id(@customer1.id, cover.id, booking_time) %></p><br/>
 
     <form action="/update_booking/<%= booking_id %>" method="get">
       <input type="submit" value="Update Booking">
-    </form>
+    </form><br/>
     <form action="/delete_booking/<%= booking_id %>" method="post">
       <input type="submit" value="Delete Booking">
     </form>

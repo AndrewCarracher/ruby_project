@@ -1,0 +1,84 @@
+/* nav bar section */
+
+
+#nav_bar {
+  background-color: #303235;
+  background-image: linear-gradient(to bottom,#303235 0,#090c0d 100%);
+  color: #303235;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 60px;
+  padding: 0;
+  margin: 0;
+  z-index: 4;
+}
+
+a:link
+{
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a:visited
+{
+  text-decoration: none;
+  color: #ffffff;
+}
+
+ul
+{
+  list-style-type: none;
+  margin: 15px 15px;
+}
+
+li
+{
+    float: right;
+    font-family: 'Gotham Pro',sans-serif;
+    padding: 0px 15px;
+}
+
+/* content */
+body {
+  background: black url('/images/restaurant.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-family: 'Gotham Pro',sans-serif;
+  color: #ffffff;
+}
+
+#content {
+  margin: 170px;
+  margin-left: 325px;
+  margin-right: 325px;
+  padding: 20px;
+  background-color: rgb(48,50,53, 0.5);
+  text-align: center;
+  border: 3px inset rgba(48,50,53, 0.6);
+}
+
+form {
+  text-align: left;
+}
+
+input{
+  float: right;
+  opacity: 0.8;
+}
+
+select{
+  float: right;
+  font-family: 'Gotham Pro',sans-serif;
+  opacity: 0.8;
+}
+
+input[type=submit]{
+  text-align: center;
+  float: none;
+  margin-left: 125px;
+  font-family: 'Gotham Pro',sans-serif;
+  color: #ffffff;
+  background-color: rgb(48,50,53, 0.6);
+}
