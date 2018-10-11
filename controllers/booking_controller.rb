@@ -15,7 +15,7 @@ post '/create_booking' do
   if availability != false
       customer1 = Customer.new( params )
       customer1.save()
-      booking1 = Booking.new({"customer_id" => customer1.id, "covers_id" => availability, "booking_time" => params["time_requested"] })
+      booking1 = Booking.new({"customers_id" => customer1.id, "covers_id" => availability, "booking_time" => params["time_requested"] })
       booking1.save()
       erb ( :create )
     end
@@ -46,11 +46,17 @@ end
 post "/updated_booking/:id" do
   booking = Booking.find(params[:id].to_i)
   booking.update(params["time_requested"])
-
-  customer1 = Customer.all(booking.customer_id)
-  customer1.update(params)
-
+  customer = Customer.all(booking.customers_id)
+  customer.update(params["first_name"], params["last_name"], params["email"], params["phone_number"],params["party_size"])
   erb( :updated)
 end
 
+post "/delete_booking/:id" do
+  #cust then booking
+  booking = Booking.find(params[:id].to_i)
+  cust_id = booking.customers_id
+  booking.delete(booking.id)
+  Customer.delete_by_id(cust_id)
+  redirect to("/")
+end
 #########

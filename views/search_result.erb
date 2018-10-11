@@ -1,18 +1,23 @@
-
+<% count = 0 %>
 <% @cover_array.each do |cover|  %>
 
   <%
   booking_time = Booking.find_time(@customer1.id, cover.id) %>
   <% if booking_time != 'not found' %>
+    <%count += 1 %>
     <p><%= p @restaurant_name + " " + booking_time.to_s + ":00" %>
 
     <% booking_id = Booking.find_id(@customer1.id, cover.id, booking_time) %></p>
-    
-    <form action="/update_booking/<%= booking_id.to_i %>" method="post">
+
+    <form action="/update_booking/<%= booking_id %>" method="get">
       <input type="submit" value="Update Booking">
     </form>
     <form action="/delete_booking/<%= booking_id %>" method="post">
-      <input type="submit" value="delete Booking">
+      <input type="submit" value="Delete Booking">
     </form>
   <% end %>
+<% end %>
+
+<% if count == 0 %>
+  <p> booking not found </p>
 <% end %>

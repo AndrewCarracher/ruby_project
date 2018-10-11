@@ -5,11 +5,11 @@ require('pry')
 class Booking
 
   attr_reader :id
-  attr_accessor :covers_id, :customer_id, :time_available, :booking_time
+  attr_accessor :covers_id, :customers_id, :time_available, :booking_time
 
   def initialize(options)
     @id = options['id'].to_i() if options['id']
-    @customer_id = options['customer_id'].to_i()
+    @customers_id = options['customers_id'].to_i()
     @covers_id = options['covers_id'].to_i()
     @time_available = ["11:00", "13:00", "15:00", "17:00", "19:00", "21:00"]
     @booking_time = options['booking_time'].to_i()
@@ -58,7 +58,7 @@ class Booking
         $1, $2, $3
         )
         RETURNING id"
-    values = [@customer_id, @covers_id, @booking_time]
+    values = [@customers_id, @covers_id, @booking_time]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
@@ -77,10 +77,10 @@ class Booking
    return Booking.new( results.first )
   end
 
-  def self.find_time(customer_id, cover_id)
+  def self.find_time(customers_id, cover_id)
     sql = "SELECT * FROM bookings
    WHERE customers_id = $1 AND covers_id = $2"
-   values = [customer_id, cover_id]
+   values = [customers_id, cover_id]
    results = SqlRunner.run( sql, values )
    if results.first == nil
      return "not found"
@@ -90,11 +90,11 @@ class Booking
    end
   end
 
-  def self.find_id(customer_id, cover_id, booking_time)
+  def self.find_id(customers_id, cover_id, booking_time)
     sql = "SELECT * FROM bookings
    WHERE customers_id = $1 AND covers_id = $2
    AND booking_time = $3"
-   values = [customer_id, cover_id, booking_time]
+   values = [customers_id, cover_id, booking_time]
    results = SqlRunner.run( sql, values )
    if results.first == nil
      return "not found"
@@ -120,7 +120,6 @@ class Booking
     WHERE id = $1"
     values = [id]
     results = SqlRunner.run( sql, values)
-    return Booking.new( results.first )
   end
 
   def self.delete()

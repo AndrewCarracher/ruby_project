@@ -54,7 +54,7 @@ class Customer
    return Customer.new( results.first )
   end
 
-  def update()
+  def update(first_name, last_name, email, phone_number, party_size)
     sql = "UPDATE customers
     SET
     (
@@ -66,7 +66,8 @@ class Customer
       ) = ( $1, $2, $3, $4, $5)
     WHERE id = $6"
 
-    values = [@first_name, @last_name, @email, @phone_number, @party_size, @id]
+    values = [first_name, last_name, email, phone_number, party_size, @id]
+    SqlRunner.run(sql, values)
   end
 
   def delete(id)
@@ -75,6 +76,13 @@ class Customer
     values = [id]
     results = SqlRunner.run( sql, values)
     return Customer.new( results.first )
+  end
+
+  def self.delete_by_id(id)
+    sql = "DELETE FROM customers
+    WHERE id = $1"
+    values = [id]
+    results = SqlRunner.run( sql, values)
   end
 
   def self.delete()
