@@ -5,10 +5,10 @@ require_relative('../models/booking')
 require('pry')
 
 
-Restaurant.delete()
-Cover.delete()
-Customer.delete()
 Booking.delete()
+Restaurant.delete()
+Customer.delete()
+Cover.delete()
 
 
 pizza_palace = Restaurant.new({
